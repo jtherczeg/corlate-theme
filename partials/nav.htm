@@ -1,0 +1,69 @@
+
+{# Note: Only one levels of sublinks are supported by Bootstrap 3 #}
+{% set
+    links = {
+	    'home':      ['home', 'Home'],
+		'about':     ['samples/about', 'About Us'],
+		'services':  ['samples/services', 'Services'],
+		'portfolio': ['samples/portfolio', 'Portfolio'],
+        'pages': {
+            name: 'Pages',
+            sublinks: {
+                'pricing':	  ['samples/pricing', 'Pricing Table'],
+                'error':	  ['error', 'Error Page'],
+                '404':		  ['404', '404 Page'],
+                'shortcodes': ['samples/shortcodes', 'Shortcodes'],
+            },
+        },
+        'blog': {
+			name: 'Blog',
+			sublinks: {
+				'blog':		 ['blog/blog', 'Blog'],
+				'blog-item': ['blog/blog-item', 'Blog Item'],
+            },
+        },
+        'contact': ['samples/contact', 'Contact'],
+    }
+%}
+
+{% macro render_menu(links) %}
+    {% for code, link in links %}
+        <li class="{{ code == currentPage ? 'active' }} {{ link.sublinks ? 'dropdown' }}">
+            <a
+                href="{{ link.sublinks ? '#' : (link.page ?: link[0])|page }}"
+                {% if link.sublinks %}data-toggle="dropdown"{% endif %}
+                class="{{ link.sublinks ? 'dropdown-toggle' }}"
+            >
+                {{ link.name ?: link[1] }}
+                {% if link.sublinks %}<span class="caret"></span>{% endif %}
+            </a>
+            {% if link.sublinks %}
+                <span class="dropdown-arrow"></span>
+                <ul class="dropdown-menu">
+                    {{ _self.render_menu(link.sublinks) }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endmacro %}
+
+{% import _self as nav %}
+
+<nav class="navbar navbar-inverse" role="banner">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="{{ 'home'|page }}"><img src="{{ 'assets/images/logo.png'|theme }}" alt="logo"></a>
+		</div>
+		<div class="collapse navbar-collapse navbar-right">
+			<ul class="nav navbar-nav">
+				{{ nav.render_menu(links) }}
+			</ul>
+		</div>
+	</div>
+</nav><!--/nav-->

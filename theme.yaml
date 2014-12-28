@@ -1,0 +1,14 @@
+name: Corlate
+code: Corlate
+description: Bootstrap powered corporate HTML theme, converted for OctoberCMS
+author: JoomShaper &amp; József Tamás Herczeg
+authorUrl: 'http://shapebootstrap.net/'
+
+# [...]
+
+form:
+    fields:
+        site_name:
+            label: Site name
+            comment: The website name as it should appear on the front-end
+            default: Corlate
