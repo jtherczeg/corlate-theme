@@ -1,6 +1,8 @@
 Corlate
 =======
 
+![Screenshot](https://raw.githubusercontent.com/jtherczeg/corlate-theme/master/assets/images/theme-preview.png)
+
 Corlate is a free, responsive, Bootstrap 3 powered theme for corporate websites, adapted from JoomShaper's popular HTML template for OctoberCMS, without any built-in 3rd party extensions.
 
 Features
